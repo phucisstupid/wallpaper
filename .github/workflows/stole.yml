@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Git
         run: |
@@ -20,15 +20,13 @@ jobs:
 
       - name: Delete old wallpapers
         run: |
-          find $GITHUB_WORKSPACE -maxdepth 1 -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) -delete
+          find $GITHUB_WORKSPACE -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) -delete
 
       - name: Download wallpapers repo
         run: |
-          mkdir -p $GITHUB_WORKSPACE/wallpapers
           git clone --depth=1 https://github.com/makccr/wallpapers temp-wallpapers
-          cd temp-wallpapers/wallpapers
-          find . -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) -exec cp {} $GITHUB_WORKSPACE/wallpapers \;
-          cd $GITHUB_WORKSPACE
+          mkdir -p $GITHUB_WORKSPACE/wallpapers
+          find temp-wallpapers/wallpapers -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) -exec cp {} $GITHUB_WORKSPACE/wallpapers \;
           rm -rf temp-wallpapers
 
       - name: Commit and push
