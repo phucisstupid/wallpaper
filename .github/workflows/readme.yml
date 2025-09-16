@@ -35,7 +35,7 @@ jobs:
           echo '```' >> README.md
           echo "" >> README.md
           echo "## Gallery" >> README.md
-          echo "💡 Tip: Click on any image to view full-size. Enjoy your stolen wallpapers!" >> README.md
+          echo "💡 Tip: Click on any image to view full-size. Enjoy your wallpapers!" >> README.md
 
           echo "<table>" >> README.md
           count=0
