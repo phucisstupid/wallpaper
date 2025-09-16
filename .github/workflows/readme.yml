@@ -11,27 +11,37 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Git
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Generate README.md
+      - name: Generate README
         run: |
-          echo "# Wallpaper Collection" > README.md
+          echo "# 🖼 Wallpapers" > README.md
           echo "" >> README.md
-          echo "Install:" >> README.md
-          echo "```sh" >> README.md
-          echo "git clone --depth 1 https://github.com/phucisstupid/wallpapers" >> README.md
-          echo "```" >> README.md
+          echo "A collection of **high-quality 4K aesthetic wallpapers**. Perfect for desktops, backgrounds, and inspiration!" >> README.md
           echo "" >> README.md
+          TOTAL=$(ls *.png *.jpg *.jpeg *.webp 2>/dev/null | wc -l)
+          echo "![Total Wallpapers](https://img.shields.io/badge/Total-$TOTAL-blue)" >> README.md
+          echo "" >> README.md
+          echo "## Install" >> README.md
+          echo "" >> README.md
+          echo "You can easily get all the wallpapers:" >> README.md
+          echo '```bash' >> README.md
+          echo 'git clone https://github.com/phucisstupid/wallpapers' >> README.md
+          echo '```' >> README.md
+          echo "" >> README.md
+          echo "## Gallery" >> README.md
+          echo "💡 Tip: Click on any image to view full-size. Enjoy your stolen wallpapers!" >> README.md
+
           echo "<table>" >> README.md
           count=0
           echo "<tr>" >> README.md
           for img in *.png *.jpg *.jpeg *.webp; do
-            if [ ! -f "$img" ]; then continue; fi
+            [ -f "$img" ] || continue
             echo "<td><a href=\"$img\"><img src=\"$img\" width=\"200\" /></a></td>" >> README.md
             count=$((count+1))
             if [ $count -eq 4 ]; then
@@ -42,10 +52,10 @@ jobs:
           echo "</tr>" >> README.md
           echo "</table>" >> README.md
 
-      - name: Commit and push README
+      - name: Commit and push
         run: |
-          git add README.md
-          git commit -m "Update README with wallpapers" || echo "No changes to commit"
+          git add .
+          git commit -m "Update README" || echo "No changes to commit"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
