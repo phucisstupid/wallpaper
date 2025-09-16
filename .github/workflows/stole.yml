@@ -1,8 +1,8 @@
-# .github/workflows/fetch_wallpapers.yml
-name: Fetch Wallpapers Smart
+name: Stole Wallpapers
 
 on:
-  workflow_dispatch: # manual trigger
+  workflow_dispatch:
+    # manual trigger
   schedule:
     - cron: '0 0 * * 0' # optional: weekly
 
@@ -30,12 +30,14 @@ jobs:
           find $GITHUB_WORKSPACE -maxdepth 1 -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) -exec md5sum {} + | sort > current.txt
           # Generate checksum of source wallpapers
           find temp-wallpapers/wallpapers -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) -exec md5sum {} + | sort > source.txt
-          # Compare
+          # Compare checksums
           if cmp -s current.txt source.txt; then
             echo "no_change=true" >> $GITHUB_OUTPUT
           else
             echo "no_change=false" >> $GITHUB_OUTPUT
           fi
+          # Clean up checksum files
+          rm -f current.txt source.txt
 
       - name: Update wallpapers if changed
         if: steps.compare.outputs.no_change == 'false'
@@ -51,7 +53,7 @@ jobs:
           git add .
           git commit -m "Update wallpapers"
           git push
-          
+
       - name: Skip update if no changes
         if: steps.compare.outputs.no_change == 'true'
         run: |
