@@ -1,8 +1,18 @@
-# Wallpaper Collection
+# 🖼 Wallpapers
 
-Install:
+A collection of **high-quality 4K aesthetic wallpapers**. Perfect for desktops, backgrounds, and inspiration!
 
+![Total Wallpapers](https://img.shields.io/badge/Total-345-blue)
 
+## Install
+
+You can easily get all the wallpapers:
+```bash
+git clone https://github.com/phucisstupid/wallpapers
+```
+
+## Gallery
+💡 Tip: Click on any image to view full-size. Enjoy your wallpapers!
 <table>
 <tr>
 <td><a href="hms-hood.png"><img src="hms-hood.png" width="200" /></a></td>
