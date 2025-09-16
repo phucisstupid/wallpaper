@@ -1,9 +1,10 @@
-name: stole Wallpapers
+# .github/workflows/fetch_wallpapers.yml
+name: Fetch Wallpapers Smart
 
 on:
-  workflow_dispatch: # allows manual trigger
+  workflow_dispatch: # manual trigger
   schedule:
-    - cron: '0 0 * * 0' # optional: run weekly
+    - cron: '0 0 * * 0' # optional: weekly
 
 jobs:
   fetch-wallpapers:
@@ -18,18 +19,41 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Download wallpapers repo
+      - name: Download wallpapers repo to temp folder
         run: |
           git clone --depth=1 https://github.com/makccr/wallpapers temp-wallpapers
-          cd temp-wallpapers/wallpapers
-          # Copy all images to root of current repo
-          find . -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) -exec cp {} $GITHUB_WORKSPACE/ \;
 
-      - name: Commit and push
+      - name: Compare wallpapers
+        id: compare
         run: |
-          cd $GITHUB_WORKSPACE
+          # Generate checksum of current wallpapers
+          find $GITHUB_WORKSPACE -maxdepth 1 -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) -exec md5sum {} + | sort > current.txt
+          # Generate checksum of source wallpapers
+          find temp-wallpapers/wallpapers -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) -exec md5sum {} + | sort > source.txt
+          # Compare
+          if cmp -s current.txt source.txt; then
+            echo "no_change=true" >> $GITHUB_OUTPUT
+          else
+            echo "no_change=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Update wallpapers if changed
+        if: steps.compare.outputs.no_change == 'false'
+        run: |
+          echo "Changes detected. Updating wallpapers..."
+          # Delete old wallpapers
+          find $GITHUB_WORKSPACE -maxdepth 1 -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) -delete
+          # Copy new wallpapers
+          find temp-wallpapers/wallpapers -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) -exec cp {} $GITHUB_WORKSPACE/ \;
+          # Clean up temp folder
+          rm -rf temp-wallpapers
+          # Commit and push
           git add .
-          git commit -m "Update wallpapers" || echo "No changes to commit"
+          git commit -m "Update wallpapers"
           git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Skip update if no changes
+        if: steps.compare.outputs.no_change == 'true'
+        run: |
+          echo "No new wallpapers. Skipping update."
+          rm -rf temp-wallpapers
