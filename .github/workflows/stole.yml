@@ -1,0 +1,35 @@
+name: stole Wallpapers
+
+on:
+  workflow_dispatch: # allows manual trigger
+  schedule:
+    - cron: '0 0 * * 0' # optional: run weekly
+
+jobs:
+  fetch-wallpapers:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout current repository
+        uses: actions/checkout@v4
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Download wallpapers repo
+        run: |
+          git clone --depth=1 https://github.com/makccr/wallpapers temp-wallpapers
+          cd temp-wallpapers/wallpapers
+          # Copy all images to root of current repo
+          find . -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) -exec cp {} $GITHUB_WORKSPACE/ \;
+
+      - name: Commit and push
+        run: |
+          cd $GITHUB_WORKSPACE
+          git add .
+          git commit -m "Update wallpapers" || echo "No changes to commit"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
