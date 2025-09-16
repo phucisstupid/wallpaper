@@ -24,24 +24,26 @@ jobs:
           echo "" >> README.md
           echo "A collection of **high-quality 4K aesthetic wallpapers**. Perfect for desktops, backgrounds, and inspiration!" >> README.md
           echo "" >> README.md
-          TOTAL=$(ls *.png *.jpg *.jpeg *.webp 2>/dev/null | wc -l)
+
+          # Count all image files recursively
+          TOTAL=$(find . -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) | wc -l)
           echo "![Total Wallpapers](https://img.shields.io/badge/Total-$TOTAL-blue)" >> README.md
           echo "" >> README.md
-          echo "## Install" >> README.md
-          echo "" >> README.md
-          echo "You can easily get all the wallpapers:" >> README.md
-          echo '```bash' >> README.md
-          echo 'git clone https://github.com/phucisstupid/wallpapers' >> README.md
+
+          echo "## Get all wallpapers" >> README.md
+          echo '```sh' >> README.md
+          echo 'git clone --depth 1 https://github.com/phucisstupid/wallpapers' >> README.md
           echo '```' >> README.md
           echo "" >> README.md
+
           echo "## Gallery" >> README.md
           echo "💡 Tip: Click on any image to view full-size. Enjoy your wallpapers!" >> README.md
-
           echo "<table>" >> README.md
           count=0
           echo "<tr>" >> README.md
-          for img in *.png *.jpg *.jpeg *.webp; do
-            [ -f "$img" ] || continue
+
+          # Loop over all image files recursively
+          find . -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) | sort | while read img; do
             echo "<td><a href=\"$img\"><img src=\"$img\" width=\"200\" /></a></td>" >> README.md
             count=$((count+1))
             if [ $count -eq 4 ]; then
@@ -49,12 +51,13 @@ jobs:
               count=0
             fi
           done
+
           echo "</tr>" >> README.md
           echo "</table>" >> README.md
 
       - name: Commit and push
         run: |
-          git add .
+          git add README.md
           git commit -m "Update README" || echo "No changes to commit"
           git push
         env:
