@@ -2,9 +2,11 @@ name: Generate Wallpapers README
 
 on:
   workflow_dispatch: # manual trigger
-  schedule:
-    - cron: '0 0 * * 0' # optional: weekly
-
+  workflow_run:
+    workflows: ["Stole Wallpapers"]   # must match fetch.yml "name"
+    types:
+      - completed
+      
 jobs:
   generate-readme:
     runs-on: ubuntu-latest
