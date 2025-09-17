@@ -54,7 +54,7 @@ jobs:
           EOF
 
           count=0
-          find wallpapers -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) | sort | while read img; do
+          find . -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) | sort | while read img; do
             echo "<td><a href=\"$img\"><img src=\"$img\" width=\"200\" /></a></td>" >> README.md
             count=$((count+1))
             if [ $count -eq 4 ]; then
