@@ -3,7 +3,7 @@ name: Generate Wallpapers README
 on:
   workflow_dispatch: # manual trigger
   workflow_run:
-    workflows: ["Stole Wallpapers"]   # must match fetch.yml "name"
+    workflows: ["Stole Wallpapers"]
     types:
       - completed
 
@@ -22,30 +22,41 @@ jobs:
 
       - name: Generate README
         run: |
-          echo "# 🖼 Wallpapers" > README.md
-          echo "" >> README.md
-          echo "A collection of **high-quality 4K aesthetic wallpapers**. Perfect for desktops, backgrounds, and inspiration!" >> README.md
-          echo "" >> README.md
+          TOTAL=$(find wallpapers -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) | wc -l)
 
-          # Count all image files recursively
-          TOTAL=$(find . -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) | wc -l)
-          echo "![Total Wallpapers](https://img.shields.io/badge/Total-$TOTAL-blue)" >> README.md
-          echo "" >> README.md
+          cat > README.md <<EOF
+          # 🖼 Wallpapers
+          A collection of **high-quality 4K aesthetic wallpapers**.  
+          Perfect for desktops, backgrounds, and inspiration!
+          
+          🚀 This repository updates **15 wallpapers every week** (via GitHub Actions).
+          
+          ## Get all wallpapers
+          \`\`\`sh
+          git clone --depth 1 https://github.com/phucisstupid/wallpapers
+          \`\`\`
+          
+          ## Why update weekly?
+          - Perfect for people who like to **change their wallpaper daily** → 15 wallpapers = 2 per day for a week.
+          - Keeps the repo size small.
 
-          echo "## Get all wallpapers" >> README.md
-          echo '```sh' >> README.md
-          echo 'git clone --depth 1 https://github.com/phucisstupid/wallpapers' >> README.md
-          echo '```' >> README.md
-          echo "" >> README.md
+          ## Update
+          Run this to always get the latest 15 wallpapers and drop old commits:
 
-          echo "## Gallery" >> README.md
-          echo "💡 Tip: Click on any image to view full-size. Enjoy your wallpapers!" >> README.md
-          echo "<table>" >> README.md
+          \`\`\`sh
+          git fetch origin && git reset --hard origin/main
+          \`\`\`
+
+          ## Gallery
+          💡 Tip: Click on any image to view full-size. Enjoy your wallpapers!
+          ![Total Wallpapers](https://img.shields.io/badge/Total-$TOTAL-blue)
+
+          <table>
+          <tr>
+          EOF
+
           count=0
-          echo "<tr>" >> README.md
-
-          # Loop over all image files recursively
-          find . -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) | sort | while read img; do
+          find wallpapers -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) | sort | while read img; do
             echo "<td><a href=\"$img\"><img src=\"$img\" width=\"200\" /></a></td>" >> README.md
             count=$((count+1))
             if [ $count -eq 4 ]; then
@@ -54,8 +65,7 @@ jobs:
             fi
           done
 
-          echo "</tr>" >> README.md
-          echo "</table>" >> README.md
+          echo "</tr></table>" >> README.md
 
       - name: Commit and push
         run: |
