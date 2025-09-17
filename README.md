@@ -2,7 +2,7 @@
 A collection of **high-quality 4K aesthetic wallpapers**. Perfect for desktops, backgrounds, and inspiration!
 
 ### 🚀 This repository updates **wallpapers every week**.
-#### Why update weekly?
+#### Why?
 - Perfect for people who like to **change their wallpaper daily** → 16 wallpapers for a week = 2/3 per day
 - Keeps the repo size small.
 
@@ -24,24 +24,24 @@ git fetch origin && git reset --hard origin/main
 
 <table>
 <tr>
-<td><a href="./10-5-Server-6k.jpg"><img src="./10-5-Server-6k.jpg" width="200" /></a></td>
-<td><a href="./ARTWORK-nighthawk.jpg"><img src="./ARTWORK-nighthawk.jpg" width="200" /></a></td>
-<td><a href="./PLACES-germnay.jpg"><img src="./PLACES-germnay.jpg" width="200" /></a></td>
-<td><a href="./The Lictors Bring to Brutus the Bodies of His Sons.jpg"><img src="./The Lictors Bring to Brutus the Bodies of His Sons.jpg" width="200" /></a></td>
+<td><a href="./GENERAL-boats-on-the-sea.jpg"><img src="./GENERAL-boats-on-the-sea.jpg" width="200" /></a></td>
+<td><a href="./OSX-10-8-6k.jpg"><img src="./OSX-10-8-6k.jpg" width="200" /></a></td>
+<td><a href="./alex-perez-marco-island.jpg"><img src="./alex-perez-marco-island.jpg" width="200" /></a></td>
+<td><a href="./cameron-venti-big-fish.jpg"><img src="./cameron-venti-big-fish.jpg" width="200" /></a></td>
 </tr><tr>
-<td><a href="./caleb-george-ship-ahore-in-hati.jpg"><img src="./caleb-george-ship-ahore-in-hati.jpg" width="200" /></a></td>
-<td><a href="./flyd-GRzLN_-o5dQ-unsplash.jpg"><img src="./flyd-GRzLN_-o5dQ-unsplash.jpg" width="200" /></a></td>
-<td><a href="./hms-hood.png"><img src="./hms-hood.png" width="200" /></a></td>
-<td><a href="./karl-ibri-CQqZ2BWeoAU-unsplash.jpg"><img src="./karl-ibri-CQqZ2BWeoAU-unsplash.jpg" width="200" /></a></td>
+<td><a href="./damhalla-iii.jpg"><img src="./damhalla-iii.jpg" width="200" /></a></td>
+<td><a href="./deborah-diem-ds_NPvoAzro-unsplash.jpg"><img src="./deborah-diem-ds_NPvoAzro-unsplash.jpg" width="200" /></a></td>
+<td><a href="./encrusted-iii.jpg"><img src="./encrusted-iii.jpg" width="200" /></a></td>
+<td><a href="./gloom.jpg"><img src="./gloom.jpg" width="200" /></a></td>
 </tr><tr>
-<td><a href="./lewis-j-goetz-JbWg7W953LY-unsplash.jpg"><img src="./lewis-j-goetz-JbWg7W953LY-unsplash.jpg" width="200" /></a></td>
-<td><a href="./marek-okon-tWWCqIMiUmg-unsplash.jpg"><img src="./marek-okon-tWWCqIMiUmg-unsplash.jpg" width="200" /></a></td>
-<td><a href="./pietro-de-grandi-T7K4aEPoGGk-unsplash.jpg"><img src="./pietro-de-grandi-T7K4aEPoGGk-unsplash.jpg" width="200" /></a></td>
-<td><a href="./shifaaz-shamoon-4mQbBC6Do0Y-unsplash.jpg"><img src="./shifaaz-shamoon-4mQbBC6Do0Y-unsplash.jpg" width="200" /></a></td>
+<td><a href="./hitchcock.jpg"><img src="./hitchcock.jpg" width="200" /></a></td>
+<td><a href="./jeremy-bishop-7KLUhedmR2c-unsplash.jpg"><img src="./jeremy-bishop-7KLUhedmR2c-unsplash.jpg" width="200" /></a></td>
+<td><a href="./portrait-of-a-flying-falcon-on-a-black-background-illustration-vector.jpg"><img src="./portrait-of-a-flying-falcon-on-a-black-background-illustration-vector.jpg" width="200" /></a></td>
+<td><a href="./shifaaz-shamoon-sLAk1guBG90-unsplash.jpg"><img src="./shifaaz-shamoon-sLAk1guBG90-unsplash.jpg" width="200" /></a></td>
 </tr><tr>
-<td><a href="./shifaaz-shamoon-58GWNC-hq_k-unsplash.jpg"><img src="./shifaaz-shamoon-58GWNC-hq_k-unsplash.jpg" width="200" /></a></td>
-<td><a href="./shot-by-cerqueira-0o_GEzyargo-unsplash.jpg"><img src="./shot-by-cerqueira-0o_GEzyargo-unsplash.jpg" width="200" /></a></td>
-<td><a href="./thirst.jpg"><img src="./thirst.jpg" width="200" /></a></td>
-<td><a href="./tim-marshall-yEOCA6oiVqg-unsplash.jpg"><img src="./tim-marshall-yEOCA6oiVqg-unsplash.jpg" width="200" /></a></td>
+<td><a href="./syd-sujuaan-FywWHwkizaQ-unsplash.jpg"><img src="./syd-sujuaan-FywWHwkizaQ-unsplash.jpg" width="200" /></a></td>
+<td><a href="./tyler-van-der-hoeven-_ok8uVzL2gI-unsplash.jpg"><img src="./tyler-van-der-hoeven-_ok8uVzL2gI-unsplash.jpg" width="200" /></a></td>
+<td><a href="./vista.jpg"><img src="./vista.jpg" width="200" /></a></td>
+<td><a href="./yuki-hirosawa-RWCzERK2Peo-unsplash.jpg"><img src="./yuki-hirosawa-RWCzERK2Peo-unsplash.jpg" width="200" /></a></td>
 </tr><tr>
 </tr></table>
