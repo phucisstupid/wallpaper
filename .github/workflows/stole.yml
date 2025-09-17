@@ -3,7 +3,7 @@ name: Stole Wallpapers
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * 0'
+    - cron: '0 0 * * 0' # weekly on Sunday
 
 jobs:
   fetch-wallpapers:
@@ -20,15 +20,14 @@ jobs:
 
       - name: Delete old wallpapers
         run: |
-          find $GITHUB_WORKSPACE -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) -delete
+          find $GITHUB_WORKSPACE -maxdepth 1 -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) -delete
 
-      - name: Download 15 random wallpapers
+      - name: Download 15 wallpapers
         run: |
           git clone --depth=1 https://github.com/makccr/wallpapers temp-wallpapers
-          mkdir -p $GITHUB_WORKSPACE/wallpapers
           find temp-wallpapers/wallpapers -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) \
             | shuf -n 15 | while read file; do
-                cp "$file" "$GITHUB_WORKSPACE/wallpapers/"
+                cp "$file" "$GITHUB_WORKSPACE/"
               done
           rm -rf temp-wallpapers
 
