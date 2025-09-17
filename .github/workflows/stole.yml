@@ -22,7 +22,7 @@ jobs:
         run: |
           find $GITHUB_WORKSPACE -maxdepth 1 -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) -delete
 
-      - name: Download 15 wallpapers
+      - name: Download wallpapers
         run: |
           git clone --depth=1 https://github.com/makccr/wallpapers temp-wallpapers
           find temp-wallpapers/wallpapers -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) \
