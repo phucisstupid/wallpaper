@@ -22,25 +22,23 @@ jobs:
 
       - name: Generate README
         run: |
-          TOTAL=$(find wallpapers -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) | wc -l)
+          TOTAL=$(find . -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) | wc -l)
 
           cat > README.md <<EOF
           # 🖼 Wallpapers
-          A collection of **high-quality 4K aesthetic wallpapers**.  
-          Perfect for desktops, backgrounds, and inspiration!
+          A collection of **high-quality 4K aesthetic wallpapers**. Perfect for desktops, backgrounds, and inspiration!
           
-          🚀 This repository updates **15 wallpapers every week**.
-          
+          ### 🚀 This repository updates **15 wallpapers every week**.
+          #### Why update weekly?
+          - Perfect for people who like to **change their wallpaper daily** → 16 wallpapers for a week = 2/3 per day
+          - Keeps the repo size small.
+
           ## Get all wallpapers
           \`\`\`sh
           git clone --depth 1 https://github.com/phucisstupid/wallpapers
           \`\`\`
-          
-          ## Why update weekly?
-          - Perfect for people who like to **change their wallpaper daily** → 15 wallpapers = 2 per day for a week.
-          - Keeps the repo size small.
 
-          ## Update
+          ## Update wallpapers
           Run this to always get the latest 15 wallpapers and drop old commits:
 
           \`\`\`sh
@@ -48,8 +46,8 @@ jobs:
           \`\`\`
 
           ## Gallery
-          💡 Tip: Click on any image to view full-size. Enjoy your wallpapers!
           ![Total Wallpapers](https://img.shields.io/badge/Total-$TOTAL-blue)
+          💡 Tip: Click on any image to view full-size. Enjoy your wallpapers!
 
           <table>
           <tr>
