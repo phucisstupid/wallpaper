@@ -22,17 +22,20 @@ jobs:
         run: |
           find $GITHUB_WORKSPACE -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) -delete
 
-      - name: Download wallpapers repo
+      - name: Download 15 random wallpapers
         run: |
           git clone --depth=1 https://github.com/makccr/wallpapers temp-wallpapers
           mkdir -p $GITHUB_WORKSPACE/wallpapers
-          find temp-wallpapers/wallpapers -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) -exec cp {} $GITHUB_WORKSPACE/wallpapers \;
+          find temp-wallpapers/wallpapers -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) \
+            | shuf -n 15 | while read file; do
+                cp "$file" "$GITHUB_WORKSPACE/wallpapers/"
+              done
           rm -rf temp-wallpapers
 
       - name: Commit and push
         run: |
           git add .
-          git commit -m "Update wallpapers" || echo "No changes to commit"
+          git commit -m "Update Wallpapers" || echo "No changes to commit"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
